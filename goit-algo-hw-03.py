@@ -11,9 +11,7 @@ def get_days_from_today(date_str):
     current_date = dtdt.today()
     #використовуєм метод toordinal(), який повертає порядковий номер дня, 
     #враховуючи кількість днів з 1 січня року 1 нашої ери.
-    return current_date.toordinal() - date_str.toordinal()
-    
-
+    return current_date.toordinal() - date_str.toordinal()   
 
 def hw_first():
     # використовуємо цикл для того, щоб не запускати ПЗ після помилки вводу користувача
@@ -21,7 +19,7 @@ def hw_first():
     while flag: 
     # Вмикаєм контроль над невірно введеними даними 
         try:
-            # Очукуэм від користувача введення даних в форматі РРРР-ММ-ДД
+            # Очикуєм від користувача введення даних в форматі РРРР-ММ-ДД
             date_str = input('Enter date in the format YYYY-MM-DD: ')
             #Перетворюємо тип стринг в датетайм
             date_object = dtdt.strptime(date_str, '%Y-%m-%d').date()
@@ -31,7 +29,7 @@ def hw_first():
             print(f"ERROR: {e}\n")
     print(f"The number of days between the specified date and the current date: {get_days_from_today(date_object)}")
 
-hw_first() #зстартуємо перше завдання
+hw_first() #стартуємо перше завдання
 
 #Завдання 2 ***************************************************************************
 def get_numbers_ticket(min, max, quantity):
@@ -59,7 +57,7 @@ def get_numbers_ticket(min, max, quantity):
     return sorted(lot)
 
 
-#print(f'Your lottery numbers {get_numbers_ticket(1, 36, 5)}')
+print(f'Your lottery numbers {get_numbers_ticket(1, 36, 5)}')
 
 # Завдання 3 *************************************************************************
 def normalize_phone(num):
@@ -76,7 +74,6 @@ def normalize_phone(num):
         case 10:# вважаем що номер записан в скороченому форматі (050 або 067), ддодаєм код країни "+38"
             return '+38' + num_str
         
-#*************
 raw_numbers = [
     "067\\t123 4567",
     "(095) 234-5678\\n",
