@@ -1,33 +1,30 @@
 
-from datetime import datetime as dtdt
+import datetime as dt
+from datetime import datetime
 import random
 import re
-import datetime as dt
 
 def get_days_from_today(date_str):
     """The function accepts the date value in "'YYYY-MM-DD'" format and
     returns the number of days between the current date and the entered date.
     """
-    current_date = dtdt.today()
+    current_date = datetime.today()
+    date_object = datetime.strptime(date_str, '%Y-%m-%d').date()
     #використовуєм метод toordinal(), який повертає порядковий номер дня, 
     #враховуючи кількість днів з 1 січня року 1 нашої ери.
-    return current_date.toordinal() - date_str.toordinal()   
+    return current_date.toordinal() - date_object.toordinal()   
 
 def hw_first():
-    # використовуємо цикл для того, щоб не запускати ПЗ після помилки вводу користувача
     flag = True
     while flag: 
     # Вмикаєм контроль над невірно введеними даними 
         try:
-            # Очикуєм від користувача введення даних в форматі РРРР-ММ-ДД
             date_str = input('Enter date in the format YYYY-MM-DD: ')
-            #Перетворюємо тип стринг в датетайм
-            date_object = dtdt.strptime(date_str, '%Y-%m-%d').date()
-            # При коректному введені дати, скидаєм флаг, щоб вийти з циклу
+            print(f"The number of days between the specified date and the current date: {get_days_from_today(date_str)}")
             flag = False
         except Exception as e:
             print(f"ERROR: {e}\n")
-    print(f"The number of days between the specified date and the current date: {get_days_from_today(date_object)}")
+    
 
 hw_first() #стартуємо перше завдання
 
@@ -43,21 +40,17 @@ def get_numbers_ticket(min, max, quantity):
         print(f"Number 'max: '{max} out of range: ")
     elif min>=max: # # Перевіряєм щоб змінна min не була більша або дорівнювала max
         print(f"Number min: {min}  cannot be greater or equal than number max: {max} ")
-    elif quantity>max: # Перевіряєм щоб змінна quantity не була більша за max 
-        print(f"Number quantity: {quantity}  cannot be greater than number max: {max} ")
-    else: # Якщо помилок не занайдено     
-        # в циклі наповнюємо список заданою кількістю випадкових значень, описаних змінною 'quantity'
+    elif quantity>(max-min): # Перевіряєм щоб змінна quantity не була більша за max 
+        print(f"Number quantity: {quantity} cannot be greater than the number of items in the list max-min: {max-min}")
+    else: 
         while len(lot)<quantity:
-            #методом randint, отримуєм випадкові зачення в диапазоні min, max
             a=random.randint(min,max)
-            #якщо значення, які додаються і знаходяться в списку, не повторюється, то додаєм до списка
             if a not in lot: 
-                lot.append(a)
-        #сортуємо список в порядку зростання та повертаєм результат роботи функції      
+                lot.append(a)      
     return sorted(lot)
 
 
-print(f'Your lottery numbers {get_numbers_ticket(1, 36, 5)}')
+print(f'Your lottery numbers {get_numbers_ticket(10, 14, 6)}')
 
 # Завдання 3 *************************************************************************
 def normalize_phone(num):
@@ -96,12 +89,12 @@ def get_upcoming_birthdays(users):
     where each dictionary contains information about the user (name key) and 
     the date of congratulation (congratulation_date key, whose data is in the format of the string 'year.month.date').
     '''
-    curent_date = dtdt.today().date() # беремо поточну дату
+    curent_date = datetime.today().date() # беремо поточну дату
     birthdays=[] # створюємо список для повернення результатів
     for user in users:
         # отримуємо дату народження людини у вигляді рядка та змінюємо рік на поточний
         birthday_date=str(curent_date.year)+ user["birthday"][4:]  
-        birthday_date=dtdt.strptime(birthday_date, "%Y.%m.%d").date() # перетворюємо дату народження в об’єкт date
+        birthday_date=datetime.strptime(birthday_date, "%Y.%m.%d").date() # перетворюємо дату народження в об’єкт date
         week_day_bdate=birthday_date.isoweekday() # Отримуємо день тижня (1-7)
         days_between=(birthday_date-curent_date).days # рахуємо різницю між поточною датою та днем народження цьогоріч у днях
         if 0<=days_between<7: # якщо день народження протягом 7 днів від сьогодні
