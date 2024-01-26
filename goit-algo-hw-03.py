@@ -34,13 +34,13 @@ def get_numbers_ticket(min, max, quantity):
     and all random numbers in the set are unique.
     '''
     lot = []
-    if (min<1 or 1>min>=1000): # Перевіряєм щоб змінна min не виходила за край інтервалу 1>min>1000
+    if (min<1 or 1>min>=1000): 
         print(f"Number 'min: '{min} out of range") 
-    elif (max<1 or max>1000): # Перевіряєм щоб змінна max не виходила за край інтервалу 1>max>1000
+    elif (max<1 or max>1000): 
         print(f"Number 'max: '{max} out of range: ")
-    elif min>=max: # # Перевіряєм щоб змінна min не була більша або дорівнювала max
+    elif min>=max: 
         print(f"Number min: {min}  cannot be greater or equal than number max: {max} ")
-    elif quantity>(max-min): # Перевіряєм щоб змінна quantity не була більша за max 
+    elif quantity>(max-min): 
         print(f"Number quantity: {quantity} cannot be greater than the number of items in the list max-min: {max-min}")
     else: 
         while len(lot)<quantity:
@@ -89,8 +89,8 @@ def get_upcoming_birthdays(users):
     where each dictionary contains information about the user (name key) and 
     the date of congratulation (congratulation_date key, whose data is in the format of the string 'year.month.date').
     '''
-    curent_date = datetime.today().date() # беремо поточну дату
-    birthdays=[] # створюємо список для повернення результатів
+    curent_date = datetime.today().date() 
+    birthdays=[] 
     for user in users:
         # отримуємо дату народження людини у вигляді рядка та змінюємо рік на поточний
         birthday_date=str(curent_date.year)+ user["birthday"][4:]  
