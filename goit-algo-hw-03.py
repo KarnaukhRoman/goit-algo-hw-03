@@ -9,24 +9,17 @@ def get_days_from_today(date_str):
     returns the number of days between the current date and the entered date.
     """
     current_date = datetime.today()
-    date_object = datetime.strptime(date_str, '%Y-%m-%d').date()
-    #використовуєм метод toordinal(), який повертає порядковий номер дня, 
-    #враховуючи кількість днів з 1 січня року 1 нашої ери.
-    return current_date.toordinal() - date_object.toordinal()   
+    try:
+        date_object = datetime.strptime(date_str, '%Y-%m-%d').date()
+        return current_date.toordinal() - date_object.toordinal()
+    except Exception as e:
+        print(f"ERROR: {e}\n")
+  
+   
+date_str = input('Enter date in the format YYYY-MM-DD: ')
+print(f"The number of days between the specified date and the current date: {get_days_from_today(date_str)}")
 
-def hw_first():
-    flag = True
-    while flag: 
-    # Вмикаєм контроль над невірно введеними даними 
-        try:
-            date_str = input('Enter date in the format YYYY-MM-DD: ')
-            print(f"The number of days between the specified date and the current date: {get_days_from_today(date_str)}")
-            flag = False
-        except Exception as e:
-            print(f"ERROR: {e}\n")
-    
 
-hw_first() #стартуємо перше завдання
 
 #Завдання 2 ***************************************************************************
 def get_numbers_ticket(min, max, quantity):
